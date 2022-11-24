@@ -1,4 +1,4 @@
-package com.example.milanuncios.DTO;
+package com.example.milanuncios.dto;
 
 import java.sql.Date;
 

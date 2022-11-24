@@ -1,4 +1,4 @@
-package com.example.milanuncios.DTO;
+package com.example.milanuncios.dto;
 
 public class CategoriaDTO {
 	private int id_categoria;

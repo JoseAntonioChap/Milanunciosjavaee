@@ -1,5 +1,6 @@
 package com.example.milanuncios.dto;
 
+
 public class RoleDTO {
 	
 	private String role;
