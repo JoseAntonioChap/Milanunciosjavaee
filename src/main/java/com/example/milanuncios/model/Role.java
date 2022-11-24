@@ -34,6 +34,13 @@ public class Role {
 		this.funciones = funciones;
 		this.usuarios = usuarios;
 	}
+	
+	
+
+	public Role(String role) {
+		super();
+		this.role = role;
+	}
 
 	public String getRole() {
 		return role;

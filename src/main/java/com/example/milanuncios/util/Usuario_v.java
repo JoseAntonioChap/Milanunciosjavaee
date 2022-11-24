@@ -16,12 +16,19 @@ public class Usuario_v {
 	}
 
 
-	public Usuario_v(String user, String password, String email) {
+
+
+
+	public Usuario_v(String user, String password, String email, String role) {
 		super();
 		this.user = user;
 		this.password = password;
 		this.email = email;
+		this.role = role;
 	}
+
+
+
 
 
 	public String getUser() {
@@ -81,10 +88,6 @@ public class Usuario_v {
 			errors.rejectValue("email", "badFormat", "rellene el email");
 		}
 		
-		if (!role.equals("admin") && !role.equals("normal")) {
-			errors.rejectValue("role", "badFormat", "El role debe ser admin o normal");
-		}
-
 		
 		return errors.hasErrors();
 	}
