@@ -21,13 +21,14 @@
 		</thead>
 		<tbody>
 			<tr th:each="c : ${categorias}">
-			<a th:href="@{|/public/lista_anuncios/${c.id_categoria}|}">	<td th:text="${c.descripcion}"></td></a>
+				<td th:text="${c.descripcion}"></td>
+			<td><a th:href="@{|/public/lista_anuncios/${c.id_categoria}|}">ir al anuncio</a></td>
 			</tr>
 
 		</tbody>
 	</table>
 	
-<a th:href="@{|/login}|}">Login</a>
-<a th:href="@{|/sign}|}">Registrar</a>
+<a th:href="@{/login}">Login</a>
+<a th:href="@{/sign}">Registrar</a>
 </body>
 </html>
