@@ -32,6 +32,5 @@ public class Controlador {
 		return "index";
 	}
 	
-	@GetMapping
 	
 }

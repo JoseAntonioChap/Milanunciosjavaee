@@ -59,4 +59,9 @@ public class AnuncioService implements IAnuncioService {
 
 	}
 
+	@Override
+	public Anuncio find_by_id(int id_anuncio) {
+		return anunciorepository.findById(id_anuncio).orElse(null);
+	}
+
 }
