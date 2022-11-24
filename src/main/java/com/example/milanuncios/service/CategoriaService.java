@@ -29,4 +29,10 @@ public class CategoriaService implements ICategoriaService {
 		return (List<Categoria>) categoriarepository.findAll();
 	}
 
+	@Override
+	public void save(Categoria categoria) {
+		categoriarepository.save(categoria);
+		
+	}
+
 }

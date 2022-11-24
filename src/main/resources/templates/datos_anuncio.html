@@ -20,7 +20,8 @@
 				<th scope="col">TITULO</th>
 				<th scope="col">DESCRIPCION</th>
 				<th scope="col">PRECIO</th>
-				<th scope="col">USUARIO</th>
+				<th scope="col">USUARIOS</th>
+				<th scope="col">EMAIL</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -30,10 +31,14 @@
 			<td th:text="${an.descripcion}"></td>
 			<td th:text="${an.precio}"></td>
 			<td th:text="${an.user}"></td>
+			<div th:each="u: ${usuario}">
+			<td th:text="${u.email}"></td></div>
 			
 			</tr>
 		</tbody>
 	</table>
-	<a th:href="@{/lista_anuncios}">Volver a anuncios</a><br>
+	<div
+	th:each="an : ${anuncio}">
+	<a th:href="@{|/public/lista_anuncios/${an.id_categoria}|}">Volver a anuncios</a><br></div>
 </body>
 </html>

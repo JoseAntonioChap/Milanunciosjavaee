@@ -23,9 +23,10 @@
 		</thead>
 		<tbody>
 			<tr th:each="a : ${anuncios}">
-			<a th:href="@{|/public/datos_anuncio/${a.id_anuncio}|}"><td th:text="$a.titulo}"></td></a>
+			<td th:text="${a.titulo}"></td>
 			<td th:text="${a.descripcion}"></td>
 			<td th:text="${a.precio}"></td>
+			<td><a th:href="@{|/public/datos_anuncio/${a.id_anuncio}|}">Ir a anuncio</a></td>
 			</tr>
 		</tbody>
 	</table>
