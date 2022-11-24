@@ -12,6 +12,7 @@
 <title>PROYECTO MIL ANUNCIOS</title>
 </head>
 <body>
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -20,11 +21,14 @@
 		</thead>
 		<tbody>
 			<tr th:each="c : ${categorias}">
-				<td th:text="${c.descripcion}"></td>
+			<a th:href="@{|/lista_anuncios/${c.id_categoria}|}">	<td th:text="${c.descripcion}"></td></a>
 			</tr>
 
 		</tbody>
-		<a class="btn btn-outline-primary" href="#" role="button">Iniciar sesion</a>
+		
 	</table>
+	
+<a th:href="@{|/login}|}">Login</a>
+<a th:href="@{|/sign}|}">Registrar</a>
 </body>
 </html>

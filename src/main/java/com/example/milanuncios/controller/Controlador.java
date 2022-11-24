@@ -15,7 +15,7 @@ import com.example.milanuncios.interfaces.ICategoriaService;
 
 
 @Controller
-public class ControladorPublico {
+public class Controlador {
 	
 	@Autowired
 	ICategoriaService categoriaService;
@@ -32,5 +32,6 @@ public class ControladorPublico {
 		return "index";
 	}
 	
-
+	@GetMapping
+	
 }
