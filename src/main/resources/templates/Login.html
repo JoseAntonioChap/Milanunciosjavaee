@@ -12,7 +12,7 @@ crossorigin="anonymous">
 <body>
 <div class="container">
 
-<form action="#" th:object="${usuario_v}" method="POST" th:action="@{/check_user}" class="form-horizontal">
+<form action="#" th:object="${usuario_v}" method="POST" th:action="@{/private/check_user}" class="form-horizontal">
 <!-- Account Number field -->
 <div class="form-group">
 <label for="number" >User</label>
@@ -40,7 +40,7 @@ style="color: red; font-size: smaller" th:errors="*{password}"></span>
 <!-- Submit button -->
 <div class="form-group">
 <div class="col-xs-offset-2 col-xs-10">
-<button type="submit" class="btn btn-primary">GRABAR</button>
+<button type="submit" class="btn btn-primary">Login</button>
 </div>
 </div>
 <a class="button" th:href="@{/}">CANCELAR</a><br>
