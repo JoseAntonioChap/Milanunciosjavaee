@@ -39,7 +39,7 @@ public class Anuncio {
 
 
 	public Anuncio(int id_anuncio, int id_categoria, Date fecha, String titulo, String descripcion, double precio,
-			String user, Categoria categoria, Usuario usuario) {
+			String user) {
 		super();
 		this.id_anuncio = id_anuncio;
 		this.id_categoria = id_categoria;
@@ -50,6 +50,18 @@ public class Anuncio {
 		this.user = user;
 		this.categoria = categoria;
 		this.usuario = usuario;
+	}
+
+
+
+	public Anuncio(int id_categoria, Date fecha, String titulo, String descripcion, double precio, String user) {
+		super();
+		this.id_categoria = id_categoria;
+		this.fecha = fecha;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.user = user;
 	}
 
 

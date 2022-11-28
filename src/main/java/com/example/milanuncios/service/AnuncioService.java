@@ -64,4 +64,10 @@ public class AnuncioService implements IAnuncioService {
 		return anunciorepository.findById(id_anuncio).orElse(null);
 	}
 
+	@Override
+	public List<Anuncio> find_contains_titulo(String titulo) {
+		// TODO Auto-generated method stub
+		return anunciorepository.findByTituloContainingIgnoreCase(titulo);
+	}
+
 }

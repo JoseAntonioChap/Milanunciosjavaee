@@ -11,4 +11,5 @@ public interface IUsuarioService {
 	public void delete_user(String usuario);
 	public Usuario find_by_user(String usuario);
 	public void save(Usuario usuario);
+	public List<Usuario> List_all();
 }

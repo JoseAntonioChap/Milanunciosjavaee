@@ -13,10 +13,23 @@
 </head>
 <body>
 
+<form action="#" th:object="${findAnuncioForm}" method="POST"
+th:action="@{/public/buscar_anuncios}" class="form-horizontal">
+<!-- Account Number field -->
+<div class="form-group">
+<label for="number">Que necesita:</label> <input type="text"
+class="form-control" id="texto" th:field="*{texto}"
+style="width: 10em;"/><br>
+<button type="submit" class="btn btn-primary">buscar</button>
+</div>
+
+</form>
+
 	<table class="table">
 		<thead>
 			<tr>
 				<th scope="col">CATEGORIAS</th>
+				<th scope="col">VER</th>
 			</tr>
 		</thead>
 		<tbody>

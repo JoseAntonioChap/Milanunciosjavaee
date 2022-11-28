@@ -91,6 +91,21 @@ public class Usuario_v {
 		
 		return errors.hasErrors();
 	}
-	
+	public boolean validate_login(Errors errors) {
+		if (StringUtils.hasText(user)) {
+
+		} else {
+			errors.rejectValue("user", "badFormat", "rellene el user");
+		}
+		if (StringUtils.hasText(password)) {
+
+		} else {
+			errors.rejectValue("password", "badFormat", "rellene el password");
+		}
+		
+		
+		
+		return errors.hasErrors();
+	}
 	
 }

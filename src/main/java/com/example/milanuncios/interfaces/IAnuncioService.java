@@ -14,4 +14,5 @@ public interface IAnuncioService {
 	public void delete_anuncio(int id_anuncio);
 	public List<Anuncio> list_all();
 	public void save(Anuncio anuncio);
+	public List<Anuncio> find_contains_titulo(String titulo);
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.example.milanuncios.interfaces.IUsuarioService;
+import com.example.milanuncios.model.Categoria;
 import com.example.milanuncios.model.Role;
 import com.example.milanuncios.model.Usuario;
 import com.example.milanuncios.repository.RoleRepository;
@@ -51,6 +52,12 @@ public class UsuarioService implements IUsuarioService {
 	public void save(Usuario usuario) {
 		usuariorepository.save(usuario);
 
+	}
+
+	@Override
+	public List<Usuario> List_all() {
+		
+		return (List<Usuario>) usuariorepository.findAll();
 	}
 
 }

@@ -20,6 +20,7 @@ import com.example.milanuncios.model.Categoria;
 import com.example.milanuncios.model.Role;
 import com.example.milanuncios.model.Usuario;
 import com.example.milanuncios.util.Usuario_v;
+import com.example.milanuncios.util.findAnuncioForm;
 import com.example.milanuncios.interfaces.ICategoriaService;
 import com.example.milanuncios.interfaces.IUsuarioService;
 
@@ -35,12 +36,16 @@ public class Controlador {
 	
 	@GetMapping("/")
 	public String listado_categorias(Model model) {
+		
 		List<Categoria> categorias = categoriaService.list_all_categorias();
 		List<CategoriaDTO> categoriasdto = new ArrayList();
 		for (Categoria categoria : categorias) {
 			CategoriaDTO categoriadto = new CategoriaDTO(categoria.getId_categoria(), categoria.getDescripcion());
 			categoriasdto.add(categoriadto);
+			
 		}
+		
+		model.addAttribute("findAnuncioForm", new findAnuncioForm());
 		model.addAttribute("categorias", categoriasdto);
 		return "index";
 	}
@@ -64,6 +69,7 @@ public class Controlador {
 	
 	@PostMapping("/grabar_user")
 	public String grabar_usuario(Model model, Usuario_v usuario_v, BindingResult result) {
+		
 		usuario_v.validate(result);
 		if (result.hasErrors()) {
 			return "sign";
@@ -89,7 +95,21 @@ public class Controlador {
 		}
 	}
 	
-	
+	@GetMapping("/cerrar_session")
+	public String cerrar(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+		List<Categoria> categorias = categoriaService.list_all_categorias();
+		List<CategoriaDTO> categoriasdto = new ArrayList();
+		for (Categoria categoria : categorias) {
+			CategoriaDTO categoriadto = new CategoriaDTO(categoria.getId_categoria(), categoria.getDescripcion());
+			categoriasdto.add(categoriadto);
+			
+		}
+		session.invalidate();
+		model.addAttribute("findAnuncioForm", new findAnuncioForm());
+		model.addAttribute("categorias", categoriasdto);
+		return "index";
+	}
 
 	
 	

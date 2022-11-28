@@ -19,9 +19,8 @@ public class Usuario {
 
 	@Id
 	private String user;
-	private String email;
 	private String password;
-	
+	private String email;
 	
 	
 	
@@ -39,14 +38,31 @@ public class Usuario {
 	}
 
 
-	public Usuario(String user, String email, String password, Set<Role> roles, List<Anuncio> anuncios) {
+	
+
+
+	public Usuario(String user, String password, String email) {
 		super();
 		this.user = user;
-		this.email = email;
 		this.password = password;
+		this.email = email;
+	}
+
+
+
+
+
+	public Usuario(String user, String password, String email, Set<Role> roles, List<Anuncio> anuncios) {
+		super();
+		this.user = user;
+		this.password = password;
+		this.email = email;
 		this.roles = roles;
 		this.anuncios = anuncios;
 	}
+
+
+
 
 
 	public String getUser() {

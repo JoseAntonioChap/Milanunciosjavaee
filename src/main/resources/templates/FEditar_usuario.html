@@ -1,0 +1,77 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+crossorigin="anonymous">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+
+<form action="#" th:object="${usuario_v}" method="POST" th:action="@{/private/modificar_usuario}" class="form-horizontal">
+<!-- Account Number field -->
+<div class="form-group">
+<label for="number" >User</label>
+<input type="text" class="form-control" id="user"
+th:field="*{user}"
+style="width: 10em;" readonly/>
+<span th:if="${#fields.hasErrors('user')}"
+style="color: red; font-size: smaller" th:errors="*{user}">Incorrect
+data</span>
+</div>
+
+
+<div class="form-group">
+<label for="descripcion" class="control-label col-xs-2">password
+</label>
+<input type="text" class="form-control" id="password"
+th:field="*{password}"
+style="width: 10em;" />
+<span th:if="${#fields.hasErrors('password')}"
+style="color: red; font-size: smaller" th:errors="*{password}">Incorrect
+data</span>
+
+</div>
+
+
+<div class="form-group">
+<label for="descripcion" class="control-label col-xs-2">email
+</label>
+<input type="text" class="form-control" id="email"
+th:field="*{email}"
+style="width: 10em;" />
+<span th:if="${#fields.hasErrors('email')}"
+style="color: red; font-size: smaller" th:errors="*{email}">Incorrect
+data</span>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Submit button -->
+<div class="form-group">
+<div class="col-xs-offset-2 col-xs-10">
+<button type="submit" class="btn btn-primary">Modificar</button>
+</div>
+</div>
+<div class="form-group">
+<span th:text="${mensaje}"></span>
+</div>
+</form>
+
+<br>
+  <a class="button" th:href="@{/private/menu_admin}">CANCELAR</a><br>
+</div>
+</body>
+</html>

@@ -5,6 +5,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-soy usuario
+
+<div class="mx-auto" style="width: 200px; margin-top: 50px">
+<ul class="list-group">
+  <li class="list-group-item active">MENU DE USUARIO</li>
+  <li class="list-group-item"><a th:href="@{/private/mis_anuncios}">Listar mis productos</a></li>
+  <li class="list-group-item"><a th:href="@{/private/alta_anuncio}">Añadir anuncio</a></li>
+  <li class="list-group-item"><a th:href="@{/private/Editarmi_usuario}">Modificar datos</a></li>
+  <li class="list-group-item"><a th:href=@{/cerrar_session}>Cerrar session </a></li>
+  
+</ul>
+</div>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.milanuncios.dto.AnuncioDTO;
@@ -16,6 +17,7 @@ import com.example.milanuncios.interfaces.ICategoriaService;
 import com.example.milanuncios.interfaces.IUsuarioService;
 import com.example.milanuncios.model.Anuncio;
 import com.example.milanuncios.model.Usuario;
+import com.example.milanuncios.util.findAnuncioForm;
 
 
 
@@ -59,5 +61,25 @@ public class ControladorPublic {
 		model.addAttribute("usuario", usuario);
 		return "datos_anuncio";
 	}
+	
+	
+	
+	@PostMapping("buscar_anuncios")
+	public String buscar_anuncios(Model model, findAnuncioForm findAnuncioForm) {
+		List<Anuncio> anuncios = anuncioService.find_contains_titulo(findAnuncioForm.getTexto());
+		
+		List<AnuncioDTO> anuncios_dto = new ArrayList();
+		for (Anuncio anuncio : anuncios) {
+			AnuncioDTO anunciodto = new AnuncioDTO(anuncio.getId_anuncio(),anuncio.getId_categoria(),anuncio.getFecha()
+					,anuncio.getTitulo(),anuncio.getDescripcion(),anuncio.getPrecio(),anuncio.getUser());
+			anuncios_dto.add(anunciodto);
+		}
+		model.addAttribute("anuncios", anuncios_dto);
+		return "listado_anuncios";
+	}
+	
+	
+	
+	
 
 }
