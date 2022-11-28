@@ -137,8 +137,9 @@ public class ControladorPrivate {
 		
 		@GetMapping("/FEditar_anuncio/{id_anuncio}")
 		public String editar_usuario(@PathVariable("id_anuncio") int id_anuncio, Model model) {
+			List<Categoria> categorias = categoriaService.list_all_categorias();
 			Anuncio anuncio = anuncioService.find_by_id(id_anuncio);
-			
+			model.addAttribute("categoria_v", categorias);
 			model.addAttribute("anuncio_v", new Anuncio_v(Integer.toString(anuncio.getId_anuncio()), Integer.toString(anuncio.getId_categoria()), anuncio.getTitulo(), anuncio.getDescripcion(),
 					Double.toString(anuncio.getPrecio()), anuncio.getUser()));
 			return "FEditar_anuncio";
@@ -146,6 +147,7 @@ public class ControladorPrivate {
 	
 		@GetMapping("/FEditar_usuario/{user}")
 		public String editar_usuario(@PathVariable("user") String user, Model model) {
+			
 			Usuario usuario = usuarioService.find_by_user(user);
 			Set<Role> roles = usuario.getRoles();
 			List<Role> rol = new ArrayList(roles);
@@ -196,7 +198,7 @@ public class ControladorPrivate {
         	List<Categoria> categorias = categoriaService.list_all_categorias();
             Anuncio_v anuncio_v = new Anuncio_v();
             model.addAttribute("anuncio_v", anuncio_v);
-            model.addAttribute("categorias", categorias);
+            model.addAttribute("categoria_v", categorias);
             return "alta_anuncio";
 
 
@@ -271,7 +273,7 @@ public class ControladorPrivate {
 
     			}
     		
-    		return "Feditar_anuncio";
+    		return lista_anuncios(model);
     	}	 }
 		
         
@@ -325,6 +327,126 @@ public class ControladorPrivate {
 		}
         
         
+        
+        
+        @GetMapping("/altamis_anuncio")
+        public String altamis_anuncio(Model model) {
+        	List<Categoria> categorias = categoriaService.list_all_categorias();
+            Anuncio_v anuncio_v = new Anuncio_v();
+            model.addAttribute("anuncio_v", anuncio_v);
+            model.addAttribute("categoria_v", categorias);
+            return "altamis_anuncios";
+
+
+
+       }
+        
+        @PostMapping("/grabarmis_anuncio")
+        public String grabarmis_anuncio(Model model, Anuncio_v anuncio_v, BindingResult result, HttpServletRequest request) {
+            HttpSession session= request.getSession(true);
+            
+            String usuario = (String) session.getAttribute("usuario");
+            Date fecha = Date.valueOf(LocalDate.now());
+            
+            anuncio_v.validate(result);
+            if (result.hasErrors()) {
+                return "altamis_anuncio";
+            } else {
+                if(categoriaService.find_by_id(Integer.parseInt(anuncio_v.getId_categoria())) == null) {
+                    model.addAttribute("mensaje", "No existe esa categoria");
+                    return "alta_anuncio";
+                    
+                }else {
+                    Anuncio anuncio = new Anuncio(Integer.parseInt(anuncio_v.getId_categoria()),fecha,anuncio_v.getTitulo(),anuncio_v.getDescripcion()
+                            ,Double.parseDouble(anuncio_v.getPrecio()),usuario);
+                    anuncioService.save(anuncio);
+                    
+                    model.addAttribute("mensaje", "Anuncio añadido correctamente");
+                    return altamis_anuncio(model);
+                }
+                
+            }
+
+
+
+       }
+        
+    	@GetMapping("/FEditarmi_anuncio/{id_anuncio}")
+		public String editarmi_usuario(@PathVariable("id_anuncio") int id_anuncio, Model model) {
+			List<Categoria> categorias = categoriaService.list_all_categorias();
+			Anuncio anuncio = anuncioService.find_by_id(id_anuncio);
+			model.addAttribute("categoria_v", categorias);
+			model.addAttribute("anuncio_v", new Anuncio_v(Integer.toString(anuncio.getId_anuncio()), Integer.toString(anuncio.getId_categoria()), anuncio.getTitulo(), anuncio.getDescripcion(),
+					Double.toString(anuncio.getPrecio()), anuncio.getUser()));
+			return "FEditarmi_anuncio";
+		}
+        
+    	
+    	
+    	 @PostMapping("/modificarmi_anuncio")
+         public String modificarmi_anuncio(Model model, Anuncio_v anuncio_v, BindingResult result, HttpServletRequest request) {
+     		anuncio_v.validate(result);
+     		Anuncio anunciocheck = anuncioService.find_by_id(Integer.parseInt(anuncio_v.getId_anuncio()));
+     		 
+     		if (result.hasErrors()) {
+     			
+     			return "Feditarmi_anuncio";
+     			
+     		}else {
+     		
+     		if(categoriaService.find_by_id(Integer.parseInt(anuncio_v.getId_categoria())) == null) {
+     			model.addAttribute("mensaje", "La categoria no existe");
+ 			
+     		}
+     		else {
+     			Anuncio anuncio = new Anuncio(Integer.parseInt(anuncio_v.getId_anuncio()), Integer.parseInt(anuncio_v.getId_categoria()), anunciocheck.getFecha(), anuncio_v.getTitulo(),anuncio_v.getDescripcion(), Double.parseDouble(anuncio_v.getPrecio()), anunciocheck.getUser());
+     				
+     				model.addAttribute("mensaje", "anuncio modificado");
+     				anuncioService.save(anuncio);
+
+     			}
+     		
+     		return lista_anuncios_user(model, request);
+     	}	 }
+ 		
+    	
+    	 @GetMapping("/FEditarmi_usuario")
+ 		public String editarmi_usuario(HttpServletRequest request, Model model) {
+ 			HttpSession session = request.getSession(true);
+ 					String user = (String) session.getAttribute("usuario");
+ 			Usuario usuario = usuarioService.find_by_user(user);
+ 			Set<Role> roles = usuario.getRoles();
+ 			List<Role> rol = new ArrayList(roles);
+ 			Role aux = rol.get(0);
+ 			System.out.println(aux.getRole());
+ 			model.addAttribute("usuario_v", new Usuario_v(usuario.getUser(), usuario.getPassword(), usuario.getEmail(), aux.getRole()));
+ 			
+ 			return "FEditarmi_usuario";
+ 		}
+    	
+         @PostMapping("/modificarmi_usuario")
+         public String modificarmi_anuncio(Model model, Usuario_v usuario_v, BindingResult result) {
+     		usuario_v.validate(result);
+     		
+     		
+     		if (result.hasErrors()) {
+     			
+     			return "FEditarmi_usuario";
+     			
+     		}else {
+     		
+     		Usuario usuario = new Usuario(usuario_v.getUser(), usuario_v.getPassword(), usuario_v.getEmail());
+     	
+     			
+     				
+     				model.addAttribute("mensaje", "usuario modificado");
+     				usuarioService.save(usuario);
+
+     		
+     		return "FEditarmi_usuario";
+     	}	 }
+    	 
+    	 
 		}
 			
 			

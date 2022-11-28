@@ -20,11 +20,11 @@
 
 
        <form action="#" th:object="${anuncio_v}" method="POST"
-            th:action="@{/private/grabar_anuncio}" class="form-horizontal">
+            th:action="@{/private/grabarmis_anuncio}" class="form-horizontal">
             <!-- Account Number field -->
             <div class="form-group">
                 <label for="number">ID categoria</label> <br>
-                <select th:field="*{id_categoria}">
+             <select th:field="*{id_categoria}">
            			<option th:each="cat:${categoria_v}"
            			th:value="${cat.id_categoria}"
            			th:text="${cat.descripcion}"
@@ -74,7 +74,7 @@
                     <button type="submit" class="btn btn-primary">GRABAR</button>
                 </div>
             </div>
-            <a class="button" th:href="@{/private/menu_admin}">CANCELAR</a><br>
+            <a class="button" th:href="@{/private/menu_user}">CANCELAR</a><br>
             <div class="form-group">
                 <span th:text="${mensaje}"></span>
             </div>
